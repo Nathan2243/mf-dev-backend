@@ -1,10 +1,17 @@
 
+using mf_dev_backend.Models;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 // adicionando este comando abaixo para alterações de compilações em HTML.
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
+
+// integração com banco de dados e a StringConnection.
+builder.Services.AddDbContext<AppDbContext>(options =>
+options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 
